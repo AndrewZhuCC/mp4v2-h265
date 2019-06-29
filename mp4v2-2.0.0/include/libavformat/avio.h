@@ -37,10 +37,10 @@ typedef struct avio_buffer{
 	int pos;
 }avio_buffer;
 
-void avio_w8(struct avio_buffer *s, uint8_t data);
-void avio_wb32(struct avio_buffer *s, uint32_t val);
-void avio_wb16(struct avio_buffer *s, uint16_t val);
-void avio_write(struct avio_buffer *pab, const unsigned char *buf, int size);
+void mp4v2_avio_w8(struct avio_buffer *s, uint8_t data);
+void mp4v2_avio_wb32(struct avio_buffer *s, uint32_t val);
+void mp4v2_avio_wb16(struct avio_buffer *s, uint16_t val);
+void mp4v2_avio_write(struct avio_buffer *pab, const unsigned char *buf, int size);
 
 
 
@@ -83,11 +83,11 @@ typedef struct AVIOContext {
     //const AVClass *av_class;//cwm
     unsigned char *buffer;  /**< Start of the buffer. */
     int buffer_size;        /**< Maximum buffer size */
-    unsigned char *buf_ptr; /**< Current position in the buffer *///cwm ¶ÔÓÚÐ´ÎÄ¼þÀ´ËµÊÇwrite_index£¬¶ÔÓÚ¶ÁÎÄ¼þÀ´ËµÊÇread_index
+    unsigned char *buf_ptr; /**< Current position in the buffer *///cwm ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ä¼ï¿½ï¿½ï¿½Ëµï¿½ï¿½write_indexï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ëµï¿½ï¿½read_index
     unsigned char *buf_end; /**< End of the data, may be less than
                                  buffer+buffer_size if the read function returned
                                  less data than requested, e.g. for streams where
-                                 no more data has been received yet. *///cwm ¶ÔÓÚÐ´ÎÄ¼þÀ´ËµÊÇread_index£¬¶ÔÓÚ¶ÁÎÄ¼þÀ´ËµÊÇwrite_index
+                                 no more data has been received yet. *///cwm ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ä¼ï¿½ï¿½ï¿½Ëµï¿½ï¿½read_indexï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ëµï¿½ï¿½write_index
 
 	avio_buffer *pAvioBuf;
 } AVIOContext;

@@ -38,15 +38,15 @@
 #define INVALID_VLC           0x80000000
 extern "C"
 {
-extern const uint8_t ff_golomb_vlc_len[512];
-extern const uint8_t ff_ue_golomb_vlc_code[512];
-extern const  int8_t ff_se_golomb_vlc_code[512];
-extern const uint8_t ff_ue_golomb_len[256];
+extern const uint8_t mp4v2_ff_golomb_vlc_len[512];
+extern const uint8_t mp4v2_ff_ue_golomb_vlc_code[512];
+extern const  int8_t mp4v2_ff_se_golomb_vlc_code[512];
+extern const uint8_t mp4v2_ff_ue_golomb_len[256];
 
-extern const uint8_t ff_interleaved_golomb_vlc_len[256];
-extern const uint8_t ff_interleaved_ue_golomb_vlc_code[256];
-extern const  int8_t ff_interleaved_se_golomb_vlc_code[256];
-extern const uint8_t ff_interleaved_dirac_golomb_vlc_code[256];
+extern const uint8_t mp4v2_ff_interleaved_golomb_vlc_len[256];
+extern const uint8_t mp4v2_ff_interleaved_ue_golomb_vlc_code[256];
+extern const  int8_t mp4v2_ff_interleaved_se_golomb_vlc_code[256];
+extern const uint8_t mp4v2_ff_interleaved_dirac_golomb_vlc_code[256];
 
 
 /**
@@ -62,10 +62,10 @@ static inline int get_ue_golomb(GetBitContext *gb)
 
     if (buf >= (1 << 27)) {
         buf >>= 32 - 9;
-        LAST_SKIP_BITS(re, gb, ff_golomb_vlc_len[buf]);
+        LAST_SKIP_BITS(re, gb, mp4v2_ff_golomb_vlc_len[buf]);
         CLOSE_READER(re, gb);
 
-        return ff_ue_golomb_vlc_code[buf];
+        return mp4v2_ff_ue_golomb_vlc_code[buf];
     } else {
         int log = 2 * av_log2(buf) - 31;
         LAST_SKIP_BITS(re, gb, 32 - log);
@@ -108,10 +108,10 @@ static inline int get_ue_golomb_31(GetBitContext *gb)
     buf = GET_CACHE(re, gb);
 
     buf >>= 32 - 9;
-    LAST_SKIP_BITS(re, gb, ff_golomb_vlc_len[buf]);
+    LAST_SKIP_BITS(re, gb, mp4v2_ff_golomb_vlc_len[buf]);
     CLOSE_READER(re, gb);
 
-    return ff_ue_golomb_vlc_code[buf];
+    return mp4v2_ff_ue_golomb_vlc_code[buf];
 }
 
 static inline unsigned svq3_get_ue_golomb(GetBitContext *gb)
@@ -124,24 +124,24 @@ static inline unsigned svq3_get_ue_golomb(GetBitContext *gb)
 
     if (buf & 0xAA800000) {
         buf >>= 32 - 8;
-        LAST_SKIP_BITS(re, gb, ff_interleaved_golomb_vlc_len[buf]);
+        LAST_SKIP_BITS(re, gb, mp4v2_ff_interleaved_golomb_vlc_len[buf]);
         CLOSE_READER(re, gb);
 
-        return ff_interleaved_ue_golomb_vlc_code[buf];
+        return mp4v2_ff_interleaved_ue_golomb_vlc_code[buf];
     } else {
         unsigned ret = 1;
 
         do {
             buf >>= 32 - 8;
             LAST_SKIP_BITS(re, gb,
-                           FFMIN(ff_interleaved_golomb_vlc_len[buf], 8));
+                           FFMIN(mp4v2_ff_interleaved_golomb_vlc_len[buf], 8));
 
-            if (ff_interleaved_golomb_vlc_len[buf] != 9) {
-                ret <<= (ff_interleaved_golomb_vlc_len[buf] - 1) >> 1;
-                ret  |= ff_interleaved_dirac_golomb_vlc_code[buf];
+            if (mp4v2_ff_interleaved_golomb_vlc_len[buf] != 9) {
+                ret <<= (mp4v2_ff_interleaved_golomb_vlc_len[buf] - 1) >> 1;
+                ret  |= mp4v2_ff_interleaved_dirac_golomb_vlc_code[buf];
                 break;
             }
-            ret = (ret << 4) | ff_interleaved_dirac_golomb_vlc_code[buf];
+            ret = (ret << 4) | mp4v2_ff_interleaved_dirac_golomb_vlc_code[buf];
             UPDATE_CACHE(re, gb);
             buf = GET_CACHE(re, gb);
         } while (ret<0x8000000U && BITS_AVAILABLE(re, gb));
@@ -192,10 +192,10 @@ static inline int get_se_golomb(GetBitContext *gb)
 
     if (buf >= (1 << 27)) {
         buf >>= 32 - 9;
-        LAST_SKIP_BITS(re, gb, ff_golomb_vlc_len[buf]);
+        LAST_SKIP_BITS(re, gb, mp4v2_ff_golomb_vlc_len[buf]);
         CLOSE_READER(re, gb);
 
-        return ff_se_golomb_vlc_code[buf];
+        return mp4v2_ff_se_golomb_vlc_code[buf];
     } else {
         int log = av_log2(buf), sign;
         LAST_SKIP_BITS(re, gb, 31 - log);
@@ -231,10 +231,10 @@ static inline int svq3_get_se_golomb(GetBitContext *gb)
 
     if (buf & 0xAA800000) {
         buf >>= 32 - 8;
-        LAST_SKIP_BITS(re, gb, ff_interleaved_golomb_vlc_len[buf]);
+        LAST_SKIP_BITS(re, gb, mp4v2_ff_interleaved_golomb_vlc_len[buf]);
         CLOSE_READER(re, gb);
 
-        return ff_interleaved_se_golomb_vlc_code[buf];
+        return mp4v2_ff_interleaved_se_golomb_vlc_code[buf];
     } else {
         int log;
         LAST_SKIP_BITS(re, gb, 8);
@@ -468,7 +468,7 @@ static inline void set_ue_golomb(PutBitContext *pb, int i)
     av_assert2(i >= 0);
 
     if (i < 256)
-        put_bits(pb, ff_ue_golomb_len[i], i + 1);
+        put_bits(pb, mp4v2_ff_ue_golomb_len[i], i + 1);
     else {
         int e = av_log2(i + 1);
         put_bits(pb, 2 * e + 1, i + 1);

@@ -144,7 +144,7 @@ void MP4Hev1Atom::Generate()
 #if 0 //cwm 144
 	uint8_t *out_addr = NULL;
 	uint32_t out_size = 0;
-	mov_write_hev1_tag(m_File.m_ui32width, m_File.m_ui32height, &out_addr, &out_size);
+	mp4v2_mov_write_hev1_tag(m_File.m_ui32width, m_File.m_ui32height, &out_addr, &out_size);
 		
     m_pProperties[0]->SetReadOnly(false);
     ((MP4BytesProperty*)m_pProperties[0])->
@@ -156,7 +156,7 @@ void MP4Hev1Atom::Generate()
 	#if 0 //cwm_add 156
 	uint8_t *out_addr = NULL;
 	uint32_t out_size = 0;
-	mov_write_hev1_tag(m_File.m_ui32width, m_File.m_ui32height, &out_addr, &out_size);
+	mp4v2_mov_write_hev1_tag(m_File.m_ui32width, m_File.m_ui32height, &out_addr, &out_size);
 		
     m_pProperties[0]->SetReadOnly(false);
     ((MP4BytesProperty*)m_pProperties[0])->

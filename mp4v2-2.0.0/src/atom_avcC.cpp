@@ -369,7 +369,7 @@ void MP4HvcCAtom::Generate()
 	uint32_t out_size = 0;
 	if(NULL != m_File.m_pPsData)
 	{
-		mov_write_hvcc_tag(m_File.m_pPsData, m_File.m_ui32PsDataSize, &out_buf, &out_size);
+		mp4v2_mov_write_hvcc_tag(m_File.m_pPsData, m_File.m_ui32PsDataSize, &out_buf, &out_size);
 	    m_pProperties[0]->SetReadOnly(false);
 	    ((MP4BytesProperty*)m_pProperties[0])->
 	    SetValue(out_buf, out_size);
@@ -408,7 +408,7 @@ void MP4HvcCAtom::Generate()
 	uint32_t out_size = 0;
 	if(NULL != m_File.m_pPsData)
 	{
-		mov_write_hvcc_tag(m_File.m_pPsData, m_File.m_ui32PsDataSize, &out_buf, &out_size);
+		mp4v2_mov_write_hvcc_tag(m_File.m_pPsData, m_File.m_ui32PsDataSize, &out_buf, &out_size);
 	    m_pProperties[0]->SetReadOnly(false);
 	    ((MP4BytesProperty*)m_pProperties[0])->
 	    SetValue(out_buf, out_size);

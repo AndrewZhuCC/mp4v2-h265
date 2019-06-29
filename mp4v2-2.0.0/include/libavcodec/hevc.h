@@ -79,7 +79,7 @@ extern "C"{
  * Table 7-3: NAL unit type codes
  */
 enum NALUnitType {
-    NAL_TRAIL_N    = 0,//Ä¬ÈÏÀàÐÍ£¬ÎÞÐ§
+    NAL_TRAIL_N    = 0,//Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½Ð§
     NAL_TRAIL_R    = 1,
     NAL_TSA_N      = 2,
     NAL_TSA_R      = 3,
@@ -111,7 +111,7 @@ enum NALUnitType {
 #include "libavformat/avio.h"
 
 typedef struct HVCCNALUnitArray {
-    uint8_t  array_completeness;//¹Ì¶¨ÖµÎª0
+    uint8_t  array_completeness;//ï¿½Ì¶ï¿½ÖµÎª0
     uint8_t  NAL_unit_type;
     uint16_t numNalus;
     uint16_t *nalUnitLength;
@@ -119,23 +119,23 @@ typedef struct HVCCNALUnitArray {
 } HVCCNALUnitArray;
 
 typedef struct HEVCDecoderConfigurationRecord {
-    uint8_t  configurationVersion;//cwm,¹Ì¶¨Öµ,1
-    uint8_t  general_profile_space;//cwm ¼ÆËãµÃµ½, 0(vps),0(sps)
-    uint8_t  general_tier_flag;//cwm ¼ÆËãµÃµ½, 0(vps),0(sps)
-    uint8_t  general_profile_idc;//cwm ¼ÆËãµÃµ½, 1(vps), 1(sps)
-    uint32_t general_profile_compatibility_flags;//cwm ¼ÆËãµÃµ½, 0x60000000(vps), 0x60000000(sps)
-    uint64_t general_constraint_indicator_flags;//cwm ¼ÆËãµÃµ½, 0xb00000000000(vps), 0xb00000000000(sps), general_constraint_indicator_flags>>16
-    uint8_t  general_level_idc;//cwm ¼ÆËãµÃµ½, 0x5d(vps), 0x5d(sps)
-    uint16_t min_spatial_segmentation_idc;//cwm ¼ÆËãµÃµ½,´óÓÚ4096±äÎª0,×îºó¼ÆËãÎª0
-    uint8_t  parallelismType;//cwm ¼ÆËãµÃµ½, 1(pps),0£¬if(min_spatial_segmentation_idc == 0) parallelismType=0
-    uint8_t  chromaFormat;//cwm ¼ÆËãµÃµ½, 1(sps)
-    uint8_t  bitDepthLumaMinus8;//cwm ¼ÆËãµÃµ½, 0(sps)
-    uint8_t  bitDepthChromaMinus8;//cwm ¼ÆËãµÃµ½, 0(sps)
-    uint16_t avgFrameRate;//cwm,¹Ì¶¨Öµ,0
-    uint8_t  constantFrameRate;//cwm,¹Ì¶¨Öµ,0
-    uint8_t  numTemporalLayers;//cwm ¼ÆËãµÃµ½,1(vps),1(sps) max,
-    uint8_t  temporalIdNested;//cwm ¼ÆËãµÃµ½, 1(sps)
-    uint8_t  lengthSizeMinusOne;//cwm ¼ÆËãµÃµ½,3 ?
+    uint8_t  configurationVersion;//cwm,ï¿½Ì¶ï¿½Öµ,1
+    uint8_t  general_profile_space;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 0(vps),0(sps)
+    uint8_t  general_tier_flag;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 0(vps),0(sps)
+    uint8_t  general_profile_idc;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 1(vps), 1(sps)
+    uint32_t general_profile_compatibility_flags;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 0x60000000(vps), 0x60000000(sps)
+    uint64_t general_constraint_indicator_flags;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 0xb00000000000(vps), 0xb00000000000(sps), general_constraint_indicator_flags>>16
+    uint8_t  general_level_idc;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 0x5d(vps), 0x5d(sps)
+    uint16_t min_spatial_segmentation_idc;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½,ï¿½ï¿½ï¿½ï¿½4096ï¿½ï¿½Îª0,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
+    uint8_t  parallelismType;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 1(pps),0ï¿½ï¿½if(min_spatial_segmentation_idc == 0) parallelismType=0
+    uint8_t  chromaFormat;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 1(sps)
+    uint8_t  bitDepthLumaMinus8;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 0(sps)
+    uint8_t  bitDepthChromaMinus8;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 0(sps)
+    uint16_t avgFrameRate;//cwm,ï¿½Ì¶ï¿½Öµ,0
+    uint8_t  constantFrameRate;//cwm,ï¿½Ì¶ï¿½Öµ,0
+    uint8_t  numTemporalLayers;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½,1(vps),1(sps) max,
+    uint8_t  temporalIdNested;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½, 1(sps)
+    uint8_t  lengthSizeMinusOne;//cwm ï¿½ï¿½ï¿½ï¿½Ãµï¿½,3 ?
     uint8_t  numOfArrays;
 	uint8_t  init;			/* add by liwei */
     HVCCNALUnitArray *array;
@@ -152,20 +152,20 @@ typedef struct HVCCProfileTierLevel {
 
 
 typedef struct HVCCData{
-	uint8_t 		m_hvcC_version_1B;//1£¬1×Ö½Ú£¬¹Ì¶¨Öµ£¬hvcc->configurationVersion£¬/* unsigned int(8) configurationVersion = 1; */
-	uint8_t 		m_hvcC_profile_space_tier_flag_profile_idc_1B;//1£¬1×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->general_profile_space << 6 | hvcc->general_tier_flag << 5 |               hvcc->general_profile_idc
-	uint32_t 		m_hvcC_profile_compatibility_flags_4B;//0x60000000£¬4×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->general_profile_compatibility_flags£¬ /* unsigned int(32) general_profile_compatibility_flags; */
-	uint32_t 		m_hvcC_constraint_indicator_flags_4B;//0xb0000000£¬4×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->general_constraint_indicator_flags >> 16£¬/* unsigned int(48) general_constraint_indicator_flags; */
-	uint16_t 		m_hvcC_constraint_indicator_flags_2B;//0,2×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->general_constraint_indicator_flags£¬0xb00000000000&0xffff=0£¬/* unsigned int(48) general_constraint_indicator_flags; */
-	uint8_t 		m_hvcC_level_idc_1B;//0x5d£¬1×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->general_level_idc£¬/* unsigned int(8) general_level_idc; */
-	uint16_t 		m_hvcC_min_spatial_segmentation_idc_2B;//0xf000£¬2×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->min_spatial_segmentation_idc | 0xf000=0 | 0xf000=0xf000£¬
-	uint8_t 		m_hvcC_parallelismType_1B;//0xfc£¬1×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->parallelismType | 0xfc=0|0xfc=0xfc=252
-	uint8_t 		m_hvcC_chromaFormat_1B;//0xfd£¬1×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->chromaFormat | 0xfc=1 | 0xfc = 0xfd=253
-	uint8_t 		m_hvcC_bitDepthLumaMinus8_1B;//0xf8£¬1×Ö½Ú£¬¼ÆËãÖµ£¬ hvcc->bitDepthLumaMinus8 | 0xf8=0 | 0xf8 = 0xf8 = 248
-	uint8_t 		m_hvcC_bitDepthChromaMinus8_1B;//0xf8£¬1×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->bitDepthChromaMinus8 | 0xf8=0 | 0xf8 = 0xf8 = 248
-	uint16_t 		m_hvcC_avgFrameRate_2B;//0,2×Ö½Ú£¬¹Ì¶¨Öµ£¬hvcc->avgFrameRate£¬ /* bit(16) avgFrameRate; */
-	uint8_t 		m_hvcC_constantFrameRate_numTemporalLayers_temporalIdNested_lengthSizeMinusOne_1B;//0xf£¬1×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->constantFrameRate << 6 | hvcc->numTemporalLayers << 3 |               hvcc->temporalIdNested  << 2 | hvcc->lengthSizeMinusOne = 0<<6 | 1<<3 | 1<<2 | 0x3 = 0xf
-	uint8_t 		m_hvcC_numOfArrays_1B;//0x3£¬1×Ö½Ú£¬¼ÆËãÖµ£¬hvcc->m_hvcC_numOfArrays_1B£¬/* unsigned int(8) m_hvcC_numOfArrays_1B; */	
+	uint8_t 		m_hvcC_version_1B;//1ï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½Ì¶ï¿½Öµï¿½ï¿½hvcc->configurationVersionï¿½ï¿½/* unsigned int(8) configurationVersion = 1; */
+	uint8_t 		m_hvcC_profile_space_tier_flag_profile_idc_1B;//1ï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->general_profile_space << 6 | hvcc->general_tier_flag << 5 |               hvcc->general_profile_idc
+	uint32_t 		m_hvcC_profile_compatibility_flags_4B;//0x60000000ï¿½ï¿½4ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->general_profile_compatibility_flagsï¿½ï¿½ /* unsigned int(32) general_profile_compatibility_flags; */
+	uint32_t 		m_hvcC_constraint_indicator_flags_4B;//0xb0000000ï¿½ï¿½4ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->general_constraint_indicator_flags >> 16ï¿½ï¿½/* unsigned int(48) general_constraint_indicator_flags; */
+	uint16_t 		m_hvcC_constraint_indicator_flags_2B;//0,2ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->general_constraint_indicator_flagsï¿½ï¿½0xb00000000000&0xffff=0ï¿½ï¿½/* unsigned int(48) general_constraint_indicator_flags; */
+	uint8_t 		m_hvcC_level_idc_1B;//0x5dï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->general_level_idcï¿½ï¿½/* unsigned int(8) general_level_idc; */
+	uint16_t 		m_hvcC_min_spatial_segmentation_idc_2B;//0xf000ï¿½ï¿½2ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->min_spatial_segmentation_idc | 0xf000=0 | 0xf000=0xf000ï¿½ï¿½
+	uint8_t 		m_hvcC_parallelismType_1B;//0xfcï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->parallelismType | 0xfc=0|0xfc=0xfc=252
+	uint8_t 		m_hvcC_chromaFormat_1B;//0xfdï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->chromaFormat | 0xfc=1 | 0xfc = 0xfd=253
+	uint8_t 		m_hvcC_bitDepthLumaMinus8_1B;//0xf8ï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ hvcc->bitDepthLumaMinus8 | 0xf8=0 | 0xf8 = 0xf8 = 248
+	uint8_t 		m_hvcC_bitDepthChromaMinus8_1B;//0xf8ï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->bitDepthChromaMinus8 | 0xf8=0 | 0xf8 = 0xf8 = 248
+	uint16_t 		m_hvcC_avgFrameRate_2B;//0,2ï¿½Ö½Ú£ï¿½ï¿½Ì¶ï¿½Öµï¿½ï¿½hvcc->avgFrameRateï¿½ï¿½ /* bit(16) avgFrameRate; */
+	uint8_t 		m_hvcC_constantFrameRate_numTemporalLayers_temporalIdNested_lengthSizeMinusOne_1B;//0xfï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->constantFrameRate << 6 | hvcc->numTemporalLayers << 3 |               hvcc->temporalIdNested  << 2 | hvcc->lengthSizeMinusOne = 0<<6 | 1<<3 | 1<<2 | 0x3 = 0xf
+	uint8_t 		m_hvcC_numOfArrays_1B;//0x3ï¿½ï¿½1ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½hvcc->m_hvcC_numOfArrays_1Bï¿½ï¿½/* unsigned int(8) m_hvcC_numOfArrays_1B; */	
 }__attribute__((packed)) HVCCData;
 
 
@@ -184,15 +184,15 @@ typedef struct HVCCData{
  * @return >=0 in case of success, a negative value corresponding to an AVERROR
  *         code in case of failure
  */
-int ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
+int mp4v2_ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
                        int size, int ps_array_completeness);
 
 
-int mov_write_hvcc_tag(const uint8_t *data, int size, uint8_t **out_buf, uint32_t *out_size);
-int mov_write_hev1_tag(uint16_t width, uint16_t height, uint8_t **out_addr, uint32_t *out_size);
+int mp4v2_mov_write_hvcc_tag(const uint8_t *data, int size, uint8_t **out_buf, uint32_t *out_size);
+int mp4v2_mov_write_hev1_tag(uint16_t width, uint16_t height, uint8_t **out_addr, uint32_t *out_size);
 
-int mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfigurationRecord *hvcc);
-int mov_assm_hvcc_data(HEVCDecoderConfigurationRecord *hvcc, HVCCData *hvcc_data);
+int mp4v2_mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfigurationRecord *hvcc);
+int mp4v2_mov_assm_hvcc_data(HEVCDecoderConfigurationRecord *hvcc, HVCCData *hvcc_data);
 
 }
 

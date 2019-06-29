@@ -58,7 +58,7 @@ void CFDNode::WriteUint32(uint8_t* uiBuf, uint32_t uiValue)
 }
 
 CFDNode::CFDNode(MP4SelfType selfType, uint32_t memSize, uint8_t* unitBuf, uint32_t uinitBufSize)
-{//×é³É½ÚµãÊý¾Ý
+{//ï¿½ï¿½É½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 	m_pData = (BUnit*)malloc(uinitBufSize + sizeof(BUnit));
 	if(NULL == m_pData)
 	{
@@ -155,7 +155,7 @@ CFDNode* MP4SelfBufList::PopNode()
 }
 
 void MP4SelfBufList::ResetData(uint32_t uiValue)
-{//ÖØÖÃÊý¾Ý
+{//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if(0 == m_iCount)
 	{
 		log.infof("%s:%d---===> 1 m_iListSize=%llu.\n", __FUNCTION__, __LINE__, m_iListSize);
@@ -241,7 +241,7 @@ void MP4SelfBuf::ResetData()
 }
 
 bool MP4SelfBuf::InitData(uint32_t uiSize, uint8_t* pType, uint32_t uiMemSize)
-{//³õÊ¼»¯
+{//ï¿½ï¿½Ê¼ï¿½ï¿½
 	int iPos = 0;
 	m_cBuf = (uint8_t*)malloc(24);
 	if(NULL == m_cBuf)
@@ -281,7 +281,7 @@ void MP4SelfBuf::WriteUint32(uint8_t* uiBuf, uint32_t uiValue)
 }
 
 bool MP4SelfBuf::AddData(uint8_t* uiBuf, uint32_t uiSize)
-{//Ìí¼ÓÊý¾Ý
+{//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if((m_uBufTotalSize - m_uBufSize) < uiSize)
 	{
 		#if 0
@@ -363,7 +363,7 @@ MP4File::MP4File( uint32_t realimeMode ) :
  * Initialize member variables (shared among constructors)
  */
 void MP4File::Init()
-{/*cwm mp4²¥·ÅÊ±±»µ÷ÓÃ*/
+{/*cwm mp4ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
     m_pRootAtom = NULL;
     m_odTrackId = MP4_INVALID_TRACK_ID;
 
@@ -852,7 +852,7 @@ void MP4File::Open( const char* name, File::Mode mode, const MP4FileProvider* pr
         }
     }
 }
-//cwm:¶ÁÈ¡mp4ÎÄ¼þÊ±,µ÷ÓÃÃ¿¸öatomµÄ¹¹Ôìº¯Êý
+//cwm:ï¿½ï¿½È¡mp4ï¿½Ä¼ï¿½Ê±,ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½atomï¿½Ä¹ï¿½ï¿½ìº¯ï¿½ï¿½
 void MP4File::ReadFromFile()
 {
     // ensure we start at beginning of file
@@ -2647,11 +2647,11 @@ MP4TrackId MP4File::AddEncH265VideoTrack(
 	if(NULL != data)
 	{ 
 		memcpy(data, pVideo, videoLen);
-		mov_hvcc_add_nal_unit(data, videoLen, &m_hvccDecoder);
+		mp4v2_mov_hvcc_add_nal_unit(data, videoLen, &m_hvccDecoder);
 		m_vpsCount ++;
 		if((m_vpsCount > 0) && (m_spsCount > 0) && (m_vpsCount > 0))
 		{
-			mov_assm_hvcc_data(&m_hvccDecoder, &m_hvccData);
+			mp4v2_mov_assm_hvcc_data(&m_hvccDecoder, &m_hvccData);
 			ModH265VideoTrack(trackId);
 		}
 		free(data);
@@ -2726,11 +2726,11 @@ void MP4File::AddH265SequenceParameterSet (MP4TrackId trackId,
 	if(NULL != data)
 	{ 
 		memcpy(data, pSequence, sequenceLen);
-		mov_hvcc_add_nal_unit(data, sequenceLen, &m_hvccDecoder);
+		mp4v2_mov_hvcc_add_nal_unit(data, sequenceLen, &m_hvccDecoder);
 		m_spsCount ++;
 		if((m_vpsCount > 0) && (m_spsCount > 0) && (m_vpsCount > 0))
 		{
-			mov_assm_hvcc_data(&m_hvccDecoder, &m_hvccData);
+			mp4v2_mov_assm_hvcc_data(&m_hvccDecoder, &m_hvccData);
 			ModH265VideoTrack(trackId);
 		}
 		free(data);
@@ -2792,11 +2792,11 @@ void MP4File::AddH265PictureParameterSet (MP4TrackId trackId,
 	if(NULL != data)
 	{ 
 		memcpy(data, pPict, pictLen);
-		mov_hvcc_add_nal_unit(data, pictLen, &m_hvccDecoder);
+		mp4v2_mov_hvcc_add_nal_unit(data, pictLen, &m_hvccDecoder);
 		m_ppsCount ++;
 		if((m_vpsCount > 0) && (m_spsCount > 0) && (m_vpsCount > 0))
 		{
-			mov_assm_hvcc_data(&m_hvccDecoder, &m_hvccData);
+			mp4v2_mov_assm_hvcc_data(&m_hvccDecoder, &m_hvccData);
 			ModH265VideoTrack(trackId);
 		}
 		free(data);
@@ -4326,13 +4326,13 @@ void MP4File::WriteSample(
 #if 1 //debug
 							typedef struct
 							{
-								unsigned int uiSampleSize;      /* ´óÐ¡*/
-								unsigned long long sampleDuration;/* ³ÖÐø¿Ì¶È*/
+								unsigned int uiSampleSize;      /* ï¿½ï¿½Ð¡*/
+								unsigned long long sampleDuration;/* ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½*/
 							}__attribute__((packed))TSizeAndDuring;
 							typedef struct
 							{
 								int uiIFrameFlag;
-								TSizeAndDuring VideoInfo;    /*ÊÓÆµÐÅÏ¢*/
+								TSizeAndDuring VideoInfo;    /*ï¿½ï¿½Æµï¿½ï¿½Ï¢*/
 							}__attribute__((packed))TVedioSampleInfo;
 
 							
@@ -4572,13 +4572,13 @@ void MP4File::WriteSample(
 					
 						typedef struct
 						{
-							unsigned int uiSampleSize;		/* ´óÐ¡*/
-							unsigned long long sampleDuration;/* ³ÖÐø¿Ì¶È*/
+							unsigned int uiSampleSize;		/* ï¿½ï¿½Ð¡*/
+							unsigned long long sampleDuration;/* ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½*/
 						}__attribute__((packed))TSizeAndDuring;
 						typedef struct
 						{
 							int uiIFrameFlag;
-							TSizeAndDuring VideoInfo;	 /*ÊÓÆµÐÅÏ¢*/
+							TSizeAndDuring VideoInfo;	 /*ï¿½ï¿½Æµï¿½ï¿½Ï¢*/
 						}__attribute__((packed))TVedioSampleInfo;
 
 						
@@ -7327,7 +7327,7 @@ bool MP4File::WriteSelfData(int iStateFlag, bool* bFinish, uint8_t* ui8Others)
 }
 
 void MP4File::RecordSelfData(uint8_t* pTmpBuf, uint8_t* ucType)
-{//¼ÇÂ¼×Ô¶¨ÒåÊý¾Ý
+{//ï¿½ï¿½Â¼ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if((ucType[0] == ADJOURN[0])
 		&& (ucType[1] == ADJOURN[1])
 		&& (ucType[2] == ADJOURN[2])
@@ -7356,7 +7356,7 @@ void MP4File::RecordSelfData(uint8_t* pTmpBuf, uint8_t* ucType)
 void MP4File::PackageSelfData(
 	uint32_t uiFlag, uint8_t* pTmpBuf, uint8_t* pTmp24Buf, CFDNode* pNode, uint8_t* ucType, uint32_t* uiPos, 
 	uint32_t* iMemSize, bool* bIsAddFlag, bool* bIsFinishAddFlag)
-{//´ò°ü×Ô¶¨ÒåÊý¾Ý
+{//ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int iPos = 0;
 	
 	if((ucType[0] == ADJOURN[0])
@@ -7383,7 +7383,7 @@ void MP4File::PackageSelfData(
 		memcpy(&m_AudioEncode, pTmpBuf+24, 4);
 	}
 
-	//×é×°×Ô¶¨ÒåÍ·
+	//ï¿½ï¿½×°ï¿½Ô¶ï¿½ï¿½ï¿½Í·
 	iPos = 0;
 	memcpy(pTmpBuf+iPos, SELF_DEFINE_FLAG, 8);
 	iPos += 8;
@@ -7443,7 +7443,7 @@ void MP4File::WriteUint32(uint8_t* uiBuf, uint32_t uiValue)
 }
 
 bool MP4File::WriteAlignData(uint8_t* unitBuf, uint64_t uinitBufSize, uint32_t uiVfSize)
-{//Êý¾Ý¶ÔÆë
+{//ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 	log.infof("...uinitBufSize... [%llu].", uinitBufSize);
 	if(m_eBoxType == MP4_DEFAULT)
 	{

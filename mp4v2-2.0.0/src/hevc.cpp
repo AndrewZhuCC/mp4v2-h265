@@ -20,8 +20,8 @@
  
  /*****************************************************************************
   * NAME		 : hevc.cpp
-  * FUNCTION	 : ½âÎöh265µÄ²ÎÊý¼¯Êý¾Ý
-  * PROGRAMMED	 : ³ÂÎÄÃô(chenwenmin)
+  * FUNCTION	 : ï¿½ï¿½ï¿½ï¿½h265ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  * PROGRAMMED	 : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(chenwenmin)
   * DATE		 : 2015-12-08
   * PROJECT 	 : 
   * OS			 : Linux
@@ -62,7 +62,7 @@ const uint8_t ff_log2_tab[256]={
 //cwm_add libavcodec/golomb.c
 #include "libavutil/common.h"
 
-const uint8_t ff_golomb_vlc_len[512]={
+const uint8_t mp4v2_ff_golomb_vlc_len[512]={
 19,17,15,15,13,13,13,13,11,11,11,11,11,11,11,11,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
 7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
@@ -81,7 +81,7 @@ const uint8_t ff_golomb_vlc_len[512]={
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 };
 
-const uint8_t ff_ue_golomb_vlc_code[512]={
+const uint8_t mp4v2_ff_ue_golomb_vlc_code[512]={
 32,32,32,32,32,32,32,32,31,32,32,32,32,32,32,32,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
  7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13,14,14,14,14,
  3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
@@ -100,7 +100,7 @@ const uint8_t ff_ue_golomb_vlc_code[512]={
  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-const int8_t ff_se_golomb_vlc_code[512]={
+const int8_t mp4v2_ff_se_golomb_vlc_code[512]={
  17, 17, 17, 17, 17, 17, 17, 17, 16, 17, 17, 17, 17, 17, 17, 17,  8, -8,  9, -9, 10,-10, 11,-11, 12,-12, 13,-13, 14,-14, 15,-15,
   4,  4,  4,  4, -4, -4, -4, -4,  5,  5,  5,  5, -5, -5, -5, -5,  6,  6,  6,  6, -6, -6, -6, -6,  7,  7,  7,  7, -7, -7, -7, -7,
   2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
@@ -120,7 +120,7 @@ const int8_t ff_se_golomb_vlc_code[512]={
 };
 
 
-const uint8_t ff_ue_golomb_len[256]={
+const uint8_t mp4v2_ff_ue_golomb_len[256]={
  1, 3, 3, 5, 5, 5, 5, 7, 7, 7, 7, 7, 7, 7, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,11,
 11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,13,
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
@@ -131,7 +131,7 @@ const uint8_t ff_ue_golomb_len[256]={
 15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,17,
 };
 
-const uint8_t ff_interleaved_golomb_vlc_len[256]={
+const uint8_t mp4v2_ff_interleaved_golomb_vlc_len[256]={
 9,9,7,7,9,9,7,7,5,5,5,5,5,5,5,5,
 9,9,7,7,9,9,7,7,5,5,5,5,5,5,5,5,
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
@@ -150,7 +150,7 @@ const uint8_t ff_interleaved_golomb_vlc_len[256]={
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 };
 
-const uint8_t ff_interleaved_ue_golomb_vlc_code[256]={
+const uint8_t mp4v2_ff_interleaved_ue_golomb_vlc_code[256]={
  15,16,7, 7, 17,18,8, 8, 3, 3, 3, 3, 3, 3, 3, 3,
  19,20,9, 9, 21,22,10,10,4, 4, 4, 4, 4, 4, 4, 4,
  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -169,7 +169,7 @@ const uint8_t ff_interleaved_ue_golomb_vlc_code[256]={
  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 
-const int8_t ff_interleaved_se_golomb_vlc_code[256]={
+const int8_t mp4v2_ff_interleaved_se_golomb_vlc_code[256]={
   8, -8,  4,  4,  9, -9, -4, -4,  2,  2,  2,  2,  2,  2,  2,  2,
  10,-10,  5,  5, 11,-11, -5, -5, -2, -2, -2, -2, -2, -2, -2, -2,
   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
@@ -188,7 +188,7 @@ const int8_t ff_interleaved_se_golomb_vlc_code[256]={
   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 };
 
-const uint8_t ff_interleaved_dirac_golomb_vlc_code[256]={
+const uint8_t mp4v2_ff_interleaved_dirac_golomb_vlc_code[256]={
 0, 1, 0, 0, 2, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
 4, 5, 2, 2, 6, 7, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -238,7 +238,7 @@ int av_log2_16bit(unsigned v)
 #include "libavformat/avio.h"
 #include "libavformat/avc.h"
 
-static const uint8_t *ff_avc_find_startcode_internal(const uint8_t *p, const uint8_t *end)
+static const uint8_t *mp4v2_ff_avc_find_startcode_internal(const uint8_t *p, const uint8_t *end)
 {
     const uint8_t *a = p + 4 - ((intptr_t)p & 3);
 
@@ -275,26 +275,26 @@ static const uint8_t *ff_avc_find_startcode_internal(const uint8_t *p, const uin
     return end + 3;
 }
 
-const uint8_t *ff_avc_find_startcode(const uint8_t *p, const uint8_t *end){
-    const uint8_t *out= ff_avc_find_startcode_internal(p, end);
-    if(p<out && out<end && !out[-1]) out--;//cwm ²»Ö´ÐÐ´Ë¾ä£¬»áÊ¹outµÄÖµ´óÓÚ1£¬Ôì³ÉÉú³ÉµÄmp4ÎÄ¼þÖÐnaluµÄÄ©Î²¶àÒ»¸ö×Ö½Ú
+const uint8_t *mp4v2_ff_avc_find_startcode(const uint8_t *p, const uint8_t *end){
+    const uint8_t *out= mp4v2_ff_avc_find_startcode_internal(p, end);
+    if(p<out && out<end && !out[-1]) out--;//cwm ï¿½ï¿½Ö´ï¿½Ð´Ë¾ä£¬ï¿½ï¿½Ê¹outï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½mp4ï¿½Ä¼ï¿½ï¿½ï¿½naluï¿½ï¿½Ä©Î²ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½ï¿½
     return out;
 }
-//½âÎö³önalµÄÊý¾Ý±£´æµ½ÁËpb->buf_ptr, buf_ptr´ú±íµÄÊÇµ±Ç°µÄ¿ÉÐ´bufµÄÎ»ÖÃ£¬ÆðÊ¼Î»ÖÃpb->buffer
-int ff_avc_parse_nal_units(AVIOContext *pb, const uint8_t *buf_in, int size)
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nalï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½æµ½ï¿½ï¿½pb->buf_ptr, buf_ptrï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ç°ï¿½Ä¿ï¿½Ð´bufï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½pb->buffer
+int mp4v2_ff_avc_parse_nal_units(AVIOContext *pb, const uint8_t *buf_in, int size)
 {
     const uint8_t *p = buf_in;
     const uint8_t *end = p + size;
     const uint8_t *nal_start, *nal_end;
 
     size = 0;
-    nal_start = ff_avc_find_startcode(p, end);
+    nal_start = mp4v2_ff_avc_find_startcode(p, end);
     for (;;) {
-        while (nal_start < end && !*(nal_start++));//È¥µô¿ªÊ¼Î»0x00000001, nal_start+=4,nal_startÖ¸Ïònalµ¥ÔªµÄ¿ªÊ¼
+        while (nal_start < end && !*(nal_start++));//È¥ï¿½ï¿½ï¿½ï¿½Ê¼Î»0x00000001, nal_start+=4,nal_startÖ¸ï¿½ï¿½nalï¿½ï¿½Ôªï¿½Ä¿ï¿½Ê¼
         if (nal_start == end)
             break;
 
-        nal_end = ff_avc_find_startcode(nal_start, end);//cwm if(nal_end==end)Ê±£¬¼ÆËã³öµÄnal_endÃ»ÓÐ¼õ1£¬Ôì³É¶àÐ´1¸ö×Ö½Ú
+        nal_end = mp4v2_ff_avc_find_startcode(nal_start, end);//cwm if(nal_end==end)Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nal_endÃ»ï¿½Ð¼ï¿½1ï¿½ï¿½ï¿½ï¿½É¶ï¿½Ð´1ï¿½ï¿½ï¿½Ö½ï¿½
 		*((uint32_t *)pb->buf_ptr) = ((nal_end - nal_start)>>24) & 0xff;
 		pb->buf_ptr += 1;
 		*((uint32_t *)pb->buf_ptr) = ((nal_end - nal_start)>>16) & 0xff;
@@ -305,8 +305,8 @@ int ff_avc_parse_nal_units(AVIOContext *pb, const uint8_t *buf_in, int size)
 		pb->buf_ptr += 1;
 		memcpy(pb->buf_ptr, nal_start, nal_end - nal_start);
 		pb->buf_ptr += (nal_end - nal_start);
-		//avio_wb32(pb, nal_end - nal_start);//naluµÄÓÐÐ§Êý¾Ý£¬²»°üº¬¿ªÊ¼±êÖ¾0x00000001
-        //avio_write(pb, nal_start, nal_end - nal_start);//Ð´naluµÄÓÐÐ§Êý¾Ýµ½
+		//mp4v2_avio_wb32(pb, nal_end - nal_start);//naluï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ö¾0x00000001
+        //mp4v2_avio_write(pb, nal_start, nal_end - nal_start);//Ð´naluï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ýµï¿½
         size += 4 + nal_end - nal_start;
         nal_start = nal_end;
     }
@@ -314,7 +314,7 @@ int ff_avc_parse_nal_units(AVIOContext *pb, const uint8_t *buf_in, int size)
 }
 
 
-int ff_avc_parse_nal_units_buf(const uint8_t *buf_in, uint8_t **buf, int *size)
+int mp4v2_avc_parse_nal_units_buf(const uint8_t *buf_in, uint8_t **buf, int *size)
 {
     AVIOContext *pb = NULL;
 	pb = (AVIOContext *)malloc(sizeof(AVIOContext));
@@ -330,7 +330,7 @@ int ff_avc_parse_nal_units_buf(const uint8_t *buf_in, uint8_t **buf, int *size)
 	}
 	pb->buf_ptr = pb->buffer;
 	
-    ff_avc_parse_nal_units(pb, buf_in, *size);
+    mp4v2_ff_avc_parse_nal_units(pb, buf_in, *size);
 
 	*buf = pb->buffer;
 	if(NULL != pb)
@@ -364,27 +364,27 @@ err_out:
 
 #include "libavformat/avio.h"
 
-void avio_w8(struct avio_buffer *s, uint8_t data)
+void mp4v2_avio_w8(struct avio_buffer *s, uint8_t data)
 {
 	s->buf[s->pos] = data;
 	s->pos ++;
 }
 
-void avio_wb32(struct avio_buffer *s, uint32_t val)
+void mp4v2_avio_wb32(struct avio_buffer *s, uint32_t val)
 {
-    avio_w8(s,           val >> 24 );
-    avio_w8(s, (uint8_t)(val >> 16));
-    avio_w8(s, (uint8_t)(val >> 8 ));
-    avio_w8(s, (uint8_t) val       );
+    mp4v2_avio_w8(s,           val >> 24 );
+    mp4v2_avio_w8(s, (uint8_t)(val >> 16));
+    mp4v2_avio_w8(s, (uint8_t)(val >> 8 ));
+    mp4v2_avio_w8(s, (uint8_t) val       );
 }
 
-void avio_wb16(struct avio_buffer *s, uint16_t val)
+void mp4v2_avio_wb16(struct avio_buffer *s, uint16_t val)
 {
-    avio_w8(s, (int)val >> 8);
-    avio_w8(s, (uint8_t)val);
+    mp4v2_avio_w8(s, (int)val >> 8);
+    mp4v2_avio_w8(s, (uint8_t)val);
 }
 
-void avio_write(struct avio_buffer *pab, const unsigned char *buf, int size)
+void mp4v2_avio_write(struct avio_buffer *pab, const unsigned char *buf, int size)
 {
 	memcpy(pab->buf + pab->pos, buf, size);
 	pab->pos += size;
@@ -1111,7 +1111,7 @@ static int hvcc_parse_pps(GetBitContext *gb,
     /* nothing useful for hvcC past this point */
     return 0;
 }
-//cwm È¥µôÓÐÇÒÖ»ÓÐÁ¬ÐøÁ½¸ö0ºóÃæµÄÒ»¸ö×Ö½Ú£¬ÀýÈç0x11 0x00 0x00 0x12 0x13,½á¹ûÎª0x11 0x00 0x00 0x13
+//cwm È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½0x11 0x00 0x00 0x12 0x13,ï¿½ï¿½ï¿½Îª0x11 0x00 0x00 0x13
 static uint8_t *nal_unit_extract_rbsp(const uint8_t *src, uint32_t src_len,
                                       uint32_t *dst_len)
 {
@@ -1128,15 +1128,15 @@ static uint8_t *nal_unit_extract_rbsp(const uint8_t *src, uint32_t src_len,
         dst[len++] = src[i++];
 
     while (i + 2 < src_len)
-        if (!src[i] && !src[i + 1] && src[i + 2] == 3) {//cwm Ñ°ÕÒÓÐÇÒÖ»ÓÐÁ¬ÐøÁ½¸ö0µÄiÖµ£¬Ìø¹ýµÚ3¸ö×Ö½Ú
-            dst[len++] = src[i++];//È¥µôÓÐÇÒÖ»ÓÐÁ¬ÐøÁ½¸ö0ºóÃæµÄÒ»¸ö×Ö½Ú£¬ÀýÈç0x11 0x00 0x00 0x12 0x13,½á¹ûÎª0x11 0x00 0x00 0x13
+        if (!src[i] && !src[i + 1] && src[i + 2] == 3) {//cwm Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½iÖµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ï¿½Ö½ï¿½
+            dst[len++] = src[i++];//È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½0x11 0x00 0x00 0x12 0x13,ï¿½ï¿½ï¿½Îª0x11 0x00 0x00 0x13
             dst[len++] = src[i++];
-            i++; // remove emulation_prevention_three_byte //Ìø¹ýµÚ3¸ö×Ö½Ú
+            i++; // remove emulation_prevention_three_byte //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ï¿½Ö½ï¿½
         } else
             dst[len++] = src[i++];
 
     while (i < src_len)
-        dst[len++] = src[i++];//cwm ±£ÁôsrcÄ©Î²µÄ×îºóÁ½¸ö×Ö½Ú
+        dst[len++] = src[i++];//cwm ï¿½ï¿½ï¿½ï¿½srcÄ©Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½
 
     *dst_len = len;
     return dst;
@@ -1193,10 +1193,10 @@ static int hvcc_array_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size,
     if (ret < 0)
         return ret;
 
-    array->nalUnit      [numNalus] = nal_buf;//±£´æµÄÊÇ²ÎÊý¼¯µÄnalÊý¾Ý
-    array->nalUnitLength[numNalus] = nal_size;//nalÊý¾ÝµÄ³¤¶È
-    array->NAL_unit_type           = nal_type;//nalÊý¾ÝµÄÀàÐÍ
-    array->numNalus++;//nalµÄ¸öÊý
+    array->nalUnit      [numNalus] = nal_buf;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nalï¿½ï¿½ï¿½ï¿½
+    array->nalUnitLength[numNalus] = nal_size;//nalï¿½ï¿½ï¿½ÝµÄ³ï¿½ï¿½ï¿½
+    array->NAL_unit_type           = nal_type;//nalï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½
+    array->numNalus++;//nalï¿½Ä¸ï¿½ï¿½ï¿½
 
     /*
      * When the sample entry name is the default and mandatory value of
@@ -1219,18 +1219,18 @@ static int hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size,
     uint8_t nal_type;
     uint8_t *rbsp_buf;
     uint32_t rbsp_size;
-	//rbsp_buf±£´æµÄÊÇ´¦ÀíºóµÄnalÊý¾Ý
-    rbsp_buf = nal_unit_extract_rbsp(nal_buf, nal_size, &rbsp_size);//cwm ¿ÉÒÆÖ²
+	//rbsp_bufï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nalï¿½ï¿½ï¿½ï¿½
+    rbsp_buf = nal_unit_extract_rbsp(nal_buf, nal_size, &rbsp_size);//cwm ï¿½ï¿½ï¿½ï¿½Ö²
     if (!rbsp_buf) {
         ret = AVERROR(ENOMEM);
         goto end;
     }
 
-    ret = init_get_bits8(&gbc, rbsp_buf, rbsp_size);//cwm ¿ÉÒÆÖ²
+    ret = init_get_bits8(&gbc, rbsp_buf, rbsp_size);//cwm ï¿½ï¿½ï¿½ï¿½Ö²
     if (ret < 0)
         goto end;
 
-    nal_unit_parse_header(&gbc, &nal_type);//cwm ¿ÉÒÆÖ²
+    nal_unit_parse_header(&gbc, &nal_type);//cwm ï¿½ï¿½ï¿½ï¿½Ö²
 
     /*
      * Note: only 'declarative' SEI messages are allowed in
@@ -1368,60 +1368,60 @@ static int hvcc_write(AVIOContext *pb_tmp, HEVCDecoderConfigurationRecord *hvcc)
 		
 #if 1 //cwm 934
     /* unsigned int(8) configurationVersion = 1; */
-    avio_w8(pb, hvcc->configurationVersion);//cwm , 1
+    mp4v2_avio_w8(pb, hvcc->configurationVersion);//cwm , 1
 
     /*
      * unsigned int(2) general_profile_space;
      * unsigned int(1) general_tier_flag;
      * unsigned int(5) general_profile_idc;
      */
-    avio_w8(pb, hvcc->general_profile_space << 6 |
+    mp4v2_avio_w8(pb, hvcc->general_profile_space << 6 |
                 hvcc->general_tier_flag     << 5 |
                 hvcc->general_profile_idc);//cwm ,1
 
     /* unsigned int(32) general_profile_compatibility_flags; */
-    avio_wb32(pb, hvcc->general_profile_compatibility_flags);//cwm ,0x60000000
+    mp4v2_avio_wb32(pb, hvcc->general_profile_compatibility_flags);//cwm ,0x60000000
 
     /* unsigned int(48) general_constraint_indicator_flags; */
 	
-    avio_wb32(pb, hvcc->general_constraint_indicator_flags >> 16);//cwm ,0xb00000000000>>16=0xb0000000
-    avio_wb16(pb, hvcc->general_constraint_indicator_flags);//cwm ,0xb00000000000&0xffff=0
+    mp4v2_avio_wb32(pb, hvcc->general_constraint_indicator_flags >> 16);//cwm ,0xb00000000000>>16=0xb0000000
+    mp4v2_avio_wb16(pb, hvcc->general_constraint_indicator_flags);//cwm ,0xb00000000000&0xffff=0
 
     /* unsigned int(8) general_level_idc; */
-    avio_w8(pb, hvcc->general_level_idc);//cwm, 0x5d
+    mp4v2_avio_w8(pb, hvcc->general_level_idc);//cwm, 0x5d
 
     /*
-     * bit(4) reserved = â€?111â€™b;
+     * bit(4) reserved = ï¿½?111â€™b;
      * unsigned int(12) min_spatial_segmentation_idc;
      */
-    avio_wb16(pb, hvcc->min_spatial_segmentation_idc | 0xf000);//cwm , 0 | 0xf000=0xf000
+    mp4v2_avio_wb16(pb, hvcc->min_spatial_segmentation_idc | 0xf000);//cwm , 0 | 0xf000=0xf000
 
     /*
-     * bit(6) reserved = â€?11111â€™b;
+     * bit(6) reserved = ï¿½?11111â€™b;
      * unsigned int(2) parallelismType;
      */
-    avio_w8(pb, hvcc->parallelismType | 0xfc);//cwm , 0|0xfc=0xfc=252
+    mp4v2_avio_w8(pb, hvcc->parallelismType | 0xfc);//cwm , 0|0xfc=0xfc=252
 
     /*
-     * bit(6) reserved = â€?11111â€™b;
+     * bit(6) reserved = ï¿½?11111â€™b;
      * unsigned int(2) chromaFormat;
      */
-    avio_w8(pb, hvcc->chromaFormat | 0xfc);//cwm , 1 | 0xfc = 0xfd=253
+    mp4v2_avio_w8(pb, hvcc->chromaFormat | 0xfc);//cwm , 1 | 0xfc = 0xfd=253
 
     /*
-     * bit(5) reserved = â€?1111â€™b;
+     * bit(5) reserved = ï¿½?1111â€™b;
      * unsigned int(3) bitDepthLumaMinus8;
      */
-    avio_w8(pb, hvcc->bitDepthLumaMinus8 | 0xf8);//cwm , 0 | 0xf8 = 0xf8 = 248
+    mp4v2_avio_w8(pb, hvcc->bitDepthLumaMinus8 | 0xf8);//cwm , 0 | 0xf8 = 0xf8 = 248
 
     /*
-     * bit(5) reserved = â€?1111â€™b;
+     * bit(5) reserved = ï¿½?1111â€™b;
      * unsigned int(3) bitDepthChromaMinus8;
      */
-    avio_w8(pb, hvcc->bitDepthChromaMinus8 | 0xf8);//cwm , 0 | 0xf8 = 0xf8 = 248
+    mp4v2_avio_w8(pb, hvcc->bitDepthChromaMinus8 | 0xf8);//cwm , 0 | 0xf8 = 0xf8 = 248
 
     /* bit(16) avgFrameRate; */
-    avio_wb16(pb, hvcc->avgFrameRate);//cwm , 0
+    mp4v2_avio_wb16(pb, hvcc->avgFrameRate);//cwm , 0
 
     /*
      * bit(2) constantFrameRate;
@@ -1429,13 +1429,13 @@ static int hvcc_write(AVIOContext *pb_tmp, HEVCDecoderConfigurationRecord *hvcc)
      * bit(1) temporalIdNested;
      * unsigned int(2) lengthSizeMinusOne;
      */
-    avio_w8(pb, hvcc->constantFrameRate << 6 |
+    mp4v2_avio_w8(pb, hvcc->constantFrameRate << 6 |
                 hvcc->numTemporalLayers << 3 |
                 hvcc->temporalIdNested  << 2 |
                 hvcc->lengthSizeMinusOne);//cwm , 0<<6 | 1<<3 | 1<<2 | 0x3 = 0xf
 
     /* unsigned int(8) numOfArrays; */
-    avio_w8(pb, hvcc->numOfArrays);//cwm , 0x3
+    mp4v2_avio_w8(pb, hvcc->numOfArrays);//cwm , 0x3
 	PrintInfo("hvcc->numOfArrays=%d", hvcc->numOfArrays);
     for (i = 0; i < hvcc->numOfArrays; i++) {
         /*
@@ -1443,18 +1443,18 @@ static int hvcc_write(AVIOContext *pb_tmp, HEVCDecoderConfigurationRecord *hvcc)
          * unsigned int(1) reserved = 0;
          * unsigned int(6) NAL_unit_type;
          */
-        avio_w8(pb, hvcc->array[i].array_completeness << 7 |
+        mp4v2_avio_w8(pb, hvcc->array[i].array_completeness << 7 |
                     (hvcc->array[i].NAL_unit_type & 0x3f));//cwm [0]=0x20, [1]=0x21, [2]=0x22
 
         /* unsigned int(16) numNalus; */
-        avio_wb16(pb, hvcc->array[i].numNalus);//cwm , [0]=1, [1]=1,  [2]=1,
+        mp4v2_avio_wb16(pb, hvcc->array[i].numNalus);//cwm , [0]=1, [1]=1,  [2]=1,
 
         for (j = 0; j < hvcc->array[i].numNalus; j++) {
             /* unsigned int(16) nalUnitLength; */
-            avio_wb16(pb, hvcc->array[i].nalUnitLength[j]);//cwm , [0]=0x22, [1]=0x1d,  [2]=0x07
+            mp4v2_avio_wb16(pb, hvcc->array[i].nalUnitLength[j]);//cwm , [0]=0x22, [1]=0x1d,  [2]=0x07
 
             /* bit(8*nalUnitLength) nalUnit; */
-            avio_write(pb, hvcc->array[i].nalUnit[j],
+            mp4v2_avio_write(pb, hvcc->array[i].nalUnit[j],
                        hvcc->array[i].nalUnitLength[j]);
         }
     }
@@ -1464,7 +1464,7 @@ static int hvcc_write(AVIOContext *pb_tmp, HEVCDecoderConfigurationRecord *hvcc)
     return 0;
 }
 
-int ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
+int mp4v2_ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
                        int size, int ps_array_completeness)//ps_array_completeness = 0
 {
     int ret = 0;
@@ -1479,7 +1479,7 @@ int ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
         goto end;
     } else if (*data == 1) {//cwm false
         /* Data is already hvcC-formatted */
-        avio_write(pb, data, size);
+        mp4v2_avio_write(pb, data, size);
         goto end;
     } else if (!(AV_RB24(data) == 1 || AV_RB32(data) == 1)) {//cwm false
         /* Not a valid Annex B start code prefix */
@@ -1487,7 +1487,7 @@ int ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
         goto end;
     }
 #endif //cwm1101
-    ret = ff_avc_parse_nal_units_buf(data, &start, &size);//cwm ÒÀ´ÎÐ´vps¡¢sps¡¢ppsµÄ´óÐ¡ÓëÓÐÐ§Êý¾Ýµ½ÎÄ¼þ
+    ret = mp4v2_avc_parse_nal_units_buf(data, &start, &size);//cwm ï¿½ï¿½ï¿½ï¿½Ð´vpsï¿½ï¿½spsï¿½ï¿½ppsï¿½Ä´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ýµï¿½ï¿½Ä¼ï¿½
     if (ret < 0)
         goto end;
 	
@@ -1496,7 +1496,7 @@ int ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
     end = start + size;//cwm start + size
 
     while (end - buf > 4) {
-        uint32_t len = FFMIN(AV_RB32(buf), end - buf - 4);//È¡×îÐ¡Öµ£¬len=32,ÊÇvpsÓÐÐ§Êý¾ÝµÄ³¤¶È
+        uint32_t len = FFMIN(AV_RB32(buf), end - buf - 4);//È¡ï¿½ï¿½Ð¡Öµï¿½ï¿½len=32,ï¿½ï¿½vpsï¿½ï¿½Ð§ï¿½ï¿½ï¿½ÝµÄ³ï¿½ï¿½ï¿½
         uint8_t type = (buf[4] >> 1) & 0x3f;
 
         buf += 4;
@@ -1518,7 +1518,7 @@ int ff_isom_write_hvcc(AVIOContext *pb, const uint8_t *data,
         buf += len;
     }
 
-    ret = hvcc_write(pb, &hvcc);//Ð´hvccÐÅÏ¢µ½ÎÄ¼þ
+    ret = hvcc_write(pb, &hvcc);//Ð´hvccï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ä¼ï¿½
 
 end:
     hvcc_close(&hvcc);
@@ -1527,7 +1527,7 @@ end:
 }
 
 
-int mov_write_hvcc_tag(const uint8_t *data, int size, uint8_t **out_buf, uint32_t *out_size)
+int mp4v2_mov_write_hvcc_tag(const uint8_t *data, int size, uint8_t **out_buf, uint32_t *out_size)
 {
 	AVIOContext avioct;
 	static avio_buffer hvccAvioBuf;
@@ -1537,14 +1537,14 @@ int mov_write_hvcc_tag(const uint8_t *data, int size, uint8_t **out_buf, uint32_
 	memset(pab->buf, 0, sizeof(pab->buf));
 	pab->pos = 0;
 	
-    ff_isom_write_hvcc(&avioct, data, size, 0);//track->vos_len = 82    
+    mp4v2_ff_isom_write_hvcc(&avioct, data, size, 0);//track->vos_len = 82    
     *out_buf = hvccAvioBuf.buf;
 	*out_size = hvccAvioBuf.pos;
 	
 	return 0;
 }
 
-int mov_write_hev1_tag(uint16_t width, uint16_t height, uint8_t **out_addr, uint32_t *out_size)
+int mp4v2_mov_write_hev1_tag(uint16_t width, uint16_t height, uint8_t **out_addr, uint32_t *out_size)
 {
 	uint8_t buf[31] = {0};
 	static avio_buffer hev1AvioBuf;
@@ -1553,24 +1553,24 @@ int mov_write_hev1_tag(uint16_t width, uint16_t height, uint8_t **out_addr, uint
 	memset(pab->buf, 0, sizeof(pab->buf));
 	pab->pos = 0;
 	
-    avio_wb32(pab, 0);
-    avio_wb16(pab, 0);
-    avio_wb16(pab, 1);
-    avio_wb16(pab, 0);
-    avio_wb16(pab, 0);
-    avio_wb32(pab, 0);
-    avio_wb32(pab, 0);
-    avio_wb32(pab, 0);
-    avio_wb16(pab, width);
-    avio_wb16(pab, height);
-    avio_wb32(pab, 0x00480000);
-    avio_wb32(pab, 0x00480000);
-    avio_wb32(pab, 0);
-    avio_wb16(pab, 1);
-    avio_w8(pab, 0);
-	avio_write(pab, buf, sizeof(buf));
-    avio_wb16(pab, 0x18);
-    avio_wb16(pab, 0xffff);
+    mp4v2_avio_wb32(pab, 0);
+    mp4v2_avio_wb16(pab, 0);
+    mp4v2_avio_wb16(pab, 1);
+    mp4v2_avio_wb16(pab, 0);
+    mp4v2_avio_wb16(pab, 0);
+    mp4v2_avio_wb32(pab, 0);
+    mp4v2_avio_wb32(pab, 0);
+    mp4v2_avio_wb32(pab, 0);
+    mp4v2_avio_wb16(pab, width);
+    mp4v2_avio_wb16(pab, height);
+    mp4v2_avio_wb32(pab, 0x00480000);
+    mp4v2_avio_wb32(pab, 0x00480000);
+    mp4v2_avio_wb32(pab, 0);
+    mp4v2_avio_wb16(pab, 1);
+    mp4v2_avio_w8(pab, 0);
+	mp4v2_avio_write(pab, buf, sizeof(buf));
+    mp4v2_avio_wb16(pab, 0x18);
+    mp4v2_avio_wb16(pab, 0xffff);
 
 	*out_addr = pab->buf;
 	*out_size = pab->pos;
@@ -1579,18 +1579,18 @@ int mov_write_hev1_tag(uint16_t width, uint16_t height, uint8_t **out_addr, uint
 
 
 /************************************************* 
-  Function: mov_hvcc_add_nal_unit
-  Description: ¶Ôh265µÄnaluÊý¾Ý½øÐÐ·ÖÎö
-  Input: nal_buf £¬Îªh265naluÊý¾ÝµÄ¿ªÊ¼µØÖ·£¬²»°üº¬¿ªÊ¼±êÖ¾0x00000001
-  Input: nal_size£¬Îªh265 naluÊý¾ÝµÄ×Ö½Ú¸öÊý
-  Input: hvcc£¬±£´æ¶Ôh265 nalu·ÖÎöµÄÓÐÐ§Êý¾Ý
+  Function: mp4v2_mov_hvcc_add_nal_unit
+  Description: ï¿½ï¿½h265ï¿½ï¿½naluï¿½ï¿½ï¿½Ý½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½
+  Input: nal_buf ï¿½ï¿½Îªh265naluï¿½ï¿½ï¿½ÝµÄ¿ï¿½Ê¼ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ö¾0x00000001
+  Input: nal_sizeï¿½ï¿½Îªh265 naluï¿½ï¿½ï¿½Ýµï¿½ï¿½Ö½Ú¸ï¿½ï¿½ï¿½
+  Input: hvccï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½h265 naluï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½
   Output: 
-  Return: ³É¹¦·µ»Ø0£¬Ê§°Ü·µ»Ø-1
-  Author: ³ÂÎÄÃô
+  Return: ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½-1
+  Author: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   Others: 20151208
 *************************************************/
 #if 0		/* modify by liwei */
-int mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfigurationRecord *hvcc)//cwm ps_array_completeness=0
+int mp4v2_mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfigurationRecord *hvcc)//cwm ps_array_completeness=0
 {
 	int ret = 0;
 	static int init_hvcc = 0;
@@ -1609,7 +1609,7 @@ int mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfig
 	return 0;
 }
 #else
-int mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfigurationRecord *hvcc)//cwm ps_array_completeness=0
+int mp4v2_mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfigurationRecord *hvcc)//cwm ps_array_completeness=0
 {
 	int ret = 0;
 	
@@ -1629,16 +1629,16 @@ int mov_hvcc_add_nal_unit(uint8_t *nal_buf, uint32_t nal_size, HEVCDecoderConfig
 
 
 /************************************************* 
-  Function: mov_assm_hvcc_data
-  Description:×é×°HEVCDecoderConfigurationRecordÎªHVCCData
-  Input: hvcc£¬Îª·ÖÎönaluÊý¾Ý£¬µÃµ½µÄÓÐÐ§Êý¾Ý
-  Output: hvcc_data£¬mp4µÄhvcC boxËùÐèµÄÐÅÏ¢
-  Return: ³É¹¦·µ»Ø0£¬Ê§°Ü·µ»Ø-1
-  Author: ³ÂÎÄÃô
+  Function: mp4v2_mov_assm_hvcc_data
+  Description:ï¿½ï¿½×°HEVCDecoderConfigurationRecordÎªHVCCData
+  Input: hvccï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½naluï¿½ï¿½ï¿½Ý£ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½
+  Output: hvcc_dataï¿½ï¿½mp4ï¿½ï¿½hvcC boxï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+  Return: ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½-1
+  Author: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   Others: 20151208
 *************************************************/
 
-int mov_assm_hvcc_data(HEVCDecoderConfigurationRecord *hvcc, HVCCData *hvcc_data)
+int mp4v2_mov_assm_hvcc_data(HEVCDecoderConfigurationRecord *hvcc, HVCCData *hvcc_data)
 {
 	if((NULL == hvcc) || (NULL == hvcc_data))
 	{
@@ -1720,32 +1720,32 @@ int mov_assm_hvcc_data(HEVCDecoderConfigurationRecord *hvcc, HVCCData *hvcc_data
     //cwm, 0x5d
 	hvcc_data->m_hvcC_level_idc_1B = hvcc->general_level_idc;
     /*
-     * bit(4) reserved = â€?111â€™b;
+     * bit(4) reserved = ï¿½?111â€™b;
      * unsigned int(12) min_spatial_segmentation_idc;
      */
     //cwm , 0 | 0xf000=0xf000
 	hvcc_data->m_hvcC_min_spatial_segmentation_idc_2B = hvcc->min_spatial_segmentation_idc | 0xf000;
     /*
-     * bit(6) reserved = â€?11111â€™b;
+     * bit(6) reserved = ï¿½?11111â€™b;
      * unsigned int(2) parallelismType;
      */
     //cwm , 0|0xfc=0xfc=252
 	hvcc_data->m_hvcC_parallelismType_1B = hvcc->parallelismType | 0xfc;
     /*
-     * bit(6) reserved = â€?11111â€™b;
+     * bit(6) reserved = ï¿½?11111â€™b;
      * unsigned int(2) chromaFormat;
      */
     //cwm , 1 | 0xfc = 0xfd=253
     hvcc_data->m_hvcC_chromaFormat_1B = hvcc->chromaFormat | 0xfc;
 
     /*
-     * bit(5) reserved = â€?1111â€™b;
+     * bit(5) reserved = ï¿½?1111â€™b;
      * unsigned int(3) bitDepthLumaMinus8;
      */
     //cwm , 0 | 0xf8 = 0xf8 = 248
 	hvcc_data->m_hvcC_bitDepthLumaMinus8_1B = hvcc->bitDepthLumaMinus8 | 0xf8;
     /*
-     * bit(5) reserved = â€?1111â€™b;
+     * bit(5) reserved = ï¿½?1111â€™b;
      * unsigned int(3) bitDepthChromaMinus8;
      */
     //cwm , 0 | 0xf8 = 0xf8 = 248
