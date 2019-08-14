@@ -37,7 +37,7 @@ do
 
   DEVROOT=`xcode-select -p`/"Platforms/$PLATFORM.platform/Developer"
   SDKROOT=$DEVROOT/SDKs/$PLATFORM$IOS_BASE_SDK.sdk
-  CFLAGS="-arch $ARCH $SIMULATOR -pipe -no-cpp-precomp -isysroot $SDKROOT -I$SDKROOT/usr/include/ -fembed-bitcode"
+  CFLAGS="-arch $ARCH $SIMULATOR -pipe -no-cpp-precomp -isysroot $SDKROOT -I$SDKROOT/usr/include/ -O2"
 
   export CFLAGS="$CFLAGS"
 
